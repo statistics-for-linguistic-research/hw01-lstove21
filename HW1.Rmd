@@ -1,0 +1,74 @@
+---
+title: "Stats for Linguistics- HW1"
+author: "LeeAnn Stover"
+date: "26 February 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/Desktop/GraduateCenter/Stats/")
+```
+
+## R Markdown
+
+### Arithmetic
+```{r Arithmetic}
+
+#Q1
+x <- (1/3) + (1/4)
+print(x)
+
+#Q2
+x <- (2^10) + 1
+print(x)
+
+#Q3
+f <- 440
+x <- 1127 * log(1 + (f/700))
+print(x)
+
+#Q4
+a <- 2
+b <- 4
+c <- -4
+x <- (-b + sqrt(b^2 - (4 *a*c)))/ 2*a
+print(x)
+
+```
+
+### Categorical data
+```{r Categorical data}
+df <- read.csv("NYC.csv", header = TRUE)
+
+# How many times did employees at the three department stores use r in the word “fourth” in the emphatic condition?
+dfemphatic <- df[df$emphasis == "emphatic",]
+emphatic_fourth <- xtabs(dfemphatic$r ~ dfemphatic$store + dfemphatic$word)
+print(emphatic_fourth)
+
+#What percentage of the time did employees at S. Klein’s use r in the word “floor”?
+SKlein <- df[df$store == "Klein's" & df$word == "flooR",]
+r_present <- ((sum(SKlein$r)) / nrow(SKlein)) * 100
+print(r_present)
+
+
+```
+
+
+### Ratio data
+```{r Ratio data}
+df <- read.csv("VOT.tsv", sep = "\t")
+
+#Sample quartiles for VOT
+print(summary(df$vot))
+
+#The mean of Spanish speakers’ VOTs
+dfSpan <-df[df$language == "spanish",]
+print(mean(dfSpan$vot))
+
+#The (sample) standard deviation of English speakers’ VOTs
+dfEng <-df[df$language == "english",]
+print(sd(dfEng$vot))
+
+```
+
